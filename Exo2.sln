@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exo2", "Exo2\Exo2.csproj", "{00634A0A-4469-42B7-A4EA-211C07E99F8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exo2.Tests", "Exo2.Tests\Exo2.Tests.csproj", "{7840A7B4-181B-42DF-B629-1C4FB4EFD64E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00634A0A-4469-42B7-A4EA-211C07E99F8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00634A0A-4469-42B7-A4EA-211C07E99F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00634A0A-4469-42B7-A4EA-211C07E99F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00634A0A-4469-42B7-A4EA-211C07E99F8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7840A7B4-181B-42DF-B629-1C4FB4EFD64E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7840A7B4-181B-42DF-B629-1C4FB4EFD64E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7840A7B4-181B-42DF-B629-1C4FB4EFD64E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7840A7B4-181B-42DF-B629-1C4FB4EFD64E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {22CB212A-D002-47D9-9B4A-7BEB5637A7ED}
+	EndGlobalSection
+EndGlobal

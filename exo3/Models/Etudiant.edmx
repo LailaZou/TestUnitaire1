@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EcoleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="etudiant">
+          <Key>
+            <PropertyRef Name="cne" />
+          </Key>
+          <Property Name="cne" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sexe" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="date_naissance" Type="date" />
+          <Property Name="adresse" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="tel" Type="varchar" MaxLength="10" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="id_filiere" Type="int" Nullable="false" />
+          <Property Name="photo" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="filiere">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom_filiere" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="respo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="stat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nomfiliere" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombreEtudiant" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_etudiant_filiere">
+          <End Role="filiere" Type="Self.filiere" Multiplicity="1" />
+          <End Role="etudiant" Type="Self.etudiant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="filiere">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="etudiant">
+              <PropertyRef Name="id_filiere" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EcoleModelStoreContainer">
+          <EntitySet Name="etudiant" EntityType="Self.etudiant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="filiere" EntityType="Self.filiere" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="stat" EntityType="Self.stat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_etudiant_filiere" Association="Self.FK_etudiant_filiere">
+            <End Role="filiere" EntitySet="filiere" />
+            <End Role="etudiant" EntitySet="etudiant" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EcoleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="etudiant">
+          <Key>
+            <PropertyRef Name="cne" />
+          </Key>
+          <Property Name="cne" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sexe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_naissance" Type="DateTime" Precision="0" />
+          <Property Name="adresse" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_filiere" Type="Int32" Nullable="false" />
+          <Property Name="photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="filiere" Relationship="Self.FK_etudiant_filiere" FromRole="etudiant" ToRole="filiere" />
+        </EntityType>
+        <EntityType Name="filiere">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom_filiere" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="respo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="etudiants" Relationship="Self.FK_etudiant_filiere" FromRole="filiere" ToRole="etudiant" />
+        </EntityType>
+        <EntityType Name="stat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomfiliere" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombreEtudiant" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_etudiant_filiere">
+          <End Role="filiere" Type="Self.filiere" Multiplicity="1" />
+          <End Role="etudiant" Type="Self.etudiant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="filiere">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="etudiant">
+              <PropertyRef Name="id_filiere" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EcoleEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="etudiants" EntityType="Self.etudiant" />
+          <EntitySet Name="filieres" EntityType="Self.filiere" />
+          <EntitySet Name="stats" EntityType="Self.stat" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_etudiant_filiere" Association="Self.FK_etudiant_filiere">
+            <End Role="filiere" EntitySet="filieres" />
+            <End Role="etudiant" EntitySet="etudiants" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EcoleModelStoreContainer" CdmEntityContainer="EcoleEntities">
+          <EntitySetMapping Name="etudiants">
+            <EntityTypeMapping TypeName="EcoleModel.etudiant">
+              <MappingFragment StoreEntitySet="etudiant">
+                <ScalarProperty Name="cne" ColumnName="cne" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="sexe" ColumnName="sexe" />
+                <ScalarProperty Name="date_naissance" ColumnName="date_naissance" />
+                <ScalarProperty Name="adresse" ColumnName="adresse" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id_filiere" ColumnName="id_filiere" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="filieres">
+            <EntityTypeMapping TypeName="EcoleModel.filiere">
+              <MappingFragment StoreEntitySet="filiere">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom_filiere" ColumnName="Nom_filiere" />
+                <ScalarProperty Name="respo" ColumnName="respo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stats">
+            <EntityTypeMapping TypeName="EcoleModel.stat">
+              <MappingFragment StoreEntitySet="stat">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nomfiliere" ColumnName="nomfiliere" />
+                <ScalarProperty Name="nombreEtudiant" ColumnName="nombreEtudiant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="EcoleModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
